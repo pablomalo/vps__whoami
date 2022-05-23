@@ -1,8 +1,7 @@
 version: '3'
 
 networks:
-  vps-traefik:
-    name: proxynet
+  proxynet:
     external: true
 
 services:
@@ -12,11 +11,11 @@ services:
     container_name: "whoami"
     restart: "unless-stopped"
     networks:
-      - vps-traefik
+      - proxynet
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.whoami.rule=Host(`whoami.pablomalo.fr`)"
-      - "traefik.http.routers.whoami.entrypoints=websecure"
-      - "traefik.http.routers.whoami.tls.certresolver=myresolver"
-      - "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https"
+      - "traefik.http.routers.whoami.entryPoints=websecure"
+      - "traefik.http.routers.whoami.tls.certResolver=letsEncrypt"
+      - "traefik.http.middlewares.sslHeader.headers.customrequestheaders.X-Forwarded-Proto=https"
       - "traefik.port=8900"
