@@ -7,15 +7,15 @@ networks:
 services:
   whoami:
     # A container that exposes an API to show its IP address
-    image: "containous/whoami"
-    container_name: "whoami"
-    restart: "unless-stopped"
+    image: 'containous/whoami'
+    container_name: whoami
+    restart: 'unless-stopped'
     networks:
       - proxynet
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`whoami.pablomalo.fr`)"
-      - "traefik.http.routers.whoami.entryPoints=websecure"
-      - "traefik.http.routers.whoami.tls.certResolver=letsEncrypt"
-      - "traefik.http.middlewares.sslHeader.headers.customrequestheaders.X-Forwarded-Proto=https"
-      - "traefik.port=8900"
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.whoami.rule=Host(`whoami.pablomalo.fr`)'
+      - 'traefik.http.routers.whoami.entryPoints=websecure'
+      - 'traefik.http.routers.whoami.tls.certResolver=letsEncrypt'
+      - 'traefik.http.middlewares.sslHeader.headers.customrequestheaders.X-Forwarded-Proto=https'
+      - 'traefik.port=8900'
